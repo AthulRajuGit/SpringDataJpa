@@ -12,6 +12,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 
 import com.example.model.MODEL.Course;
+import com.example.model.MODEL.Student;
 import com.example.model.MODEL.Teacher;
 
 @SpringBootTest
@@ -77,6 +78,15 @@ class CourseRepoTest {
 		System.out.println(courses);
 	}
 	
+	
+	@Test
+	public void saveCourseWithStudentAndTeacher() {
+		Teacher teacher=Teacher.builder().firstName("Abdul").lastName("Basith").build();
+		Student student=Student.builder().firstName("Abhishek").lastName("singh").emailId("abhishek@gmail.com").build();
+		Course course=Course.builder().title("AI").credit(6).teacher(teacher).build();
+	    course.addStudent(student);
+		courseRepo.save(course);
+	}
 	
 
 }

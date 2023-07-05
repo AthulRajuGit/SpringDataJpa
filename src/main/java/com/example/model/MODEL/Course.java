@@ -3,12 +3,17 @@ package com.example.model.MODEL;
 
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.SequenceGenerator;
@@ -41,5 +46,24 @@ public class Course {
 	 @ManyToOne(cascade = CascadeType.ALL)
 	 @JoinColumn(name = "teacher_id",referencedColumnName = "teacherId")
 	 private Teacher teacher;
+	 
+	 @ManyToMany(cascade=CascadeType.ALL)
+	 @JoinTable(
+			 name="course_student_table",
+			 joinColumns=@JoinColumn(
+					 name="course_Id",
+					 referencedColumnName="courseId"
+					 ),
+			 inverseJoinColumns=@JoinColumn(
+					 name="student_Id",
+					 referencedColumnName="studentId"
+					 )
+			 )
+	 private List<Student> students;
 	
+	 
+	 public void addStudent(Student student){
+		 if(students==null) students=new  ArrayList<>();
+		 students.add(student);
+	 }
 }

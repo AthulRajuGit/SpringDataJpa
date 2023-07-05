@@ -23,7 +23,8 @@ class TeacherRepoTest {
 		Course courseDB=Course.builder().title("DB").credit(6).build();
 		Course courseSP=Course.builder().title("Spring").credit(6).build();
 		
-		Teacher teacher=Teacher.builder().firstName("Shabbir").lastName("Khan").courses(List.of(courseDB,courseSP))
+		Teacher teacher=Teacher.builder().firstName("Shabbir").lastName("Khan")
+				//.courses(List.of(courseDB,courseSP))
 				.build();
 		
 		teacherRepo.save(teacher);
